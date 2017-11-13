@@ -1,10 +1,9 @@
 var express = require('express')
 var bodyParser = require('body-parser');
-var router = express.Router()
-//var Product = require('../models/product');
+var router = express.Router();
 
-router.get('/new', (req, res) =>{
-  res.render('subreddit-new')
-  //render a form to input the Title, author, description, admin access
-});
+//Search post model for specific subreddit
+router.get('r/:subreddit', (req, res)=>{
+  Post.find({subreddit: subreddit}).then( ()=>{
+})
 module.exports = router

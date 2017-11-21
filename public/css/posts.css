@@ -1,0 +1,15 @@
+.post-item {
+  display: inline-flex;
+  padding: 5px;
+}
+.comment-container {
+  display: none;
+}
+.comment-container .show {
+  display: block;
+}
+.voting button {
+  width: 60px;
+  height: 50%;
+  margin-left: 5px;
+}

@@ -17,8 +17,7 @@ UserSchema.pre('save', function(next) {
   if ( !this.createdAt ) {
     this.createdAt = now;
   }
-
-  // ENCRYPT PASSWORD
+  // If the passsword is not modified ENCRYPT PASSWORD
   const user = this;
   if (!user.isModified('password')) {
     return next();
@@ -30,9 +29,8 @@ UserSchema.pre('save', function(next) {
     });
   });
 });
-
-
-UserSchema.methods.comparePassword = (password, done) => {
+// ES6 Dosent bind this
+UserSchema.methods.comparePassword = function(password, done){
   bcrypt.compare(password, this.password, (err, isMatch) => {
     done(err, isMatch);
   });

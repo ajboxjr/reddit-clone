@@ -1,0 +1,33 @@
+<a href="/">Back to Home</a>
+<div class=container>
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3">
+    <div class="post-item">
+      <div class="post-content">
+          <h1 class="posts-title" id="{{this._id}}">{{post.title}}</h1>
+          <div class="post-item-info">
+            <h3 class="post-item-subreddit">Author: {{post.author.username}}</h3>
+            <h4 class="post-item-created">Created at: {{post.createdAt}}</h4>
+          </div>
+        <p class="post-item-content">{{post.content}}</p>
+      </div>
+      <div class="voting">
+        <button type="button" name="upvote">Upvote</button>
+        <button type="button" id="downvote" name="downvote">Down Vote</button>
+      </div>
+    </div>
+    <button type="button" id=commentButton name="comment">Add comment</button>
+    <div class="comment-container">
+        <input type="text" name="commentInput" id="commentInput" value="comment">
+    </div>
+    </div>
+  </div>
+</div>
+  <style>
+    .post-item {
+      display: flex;
+    }
+    .post-content {
+      flex-direction: row;
+    }
+  </style>

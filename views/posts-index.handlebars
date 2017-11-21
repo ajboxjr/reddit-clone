@@ -1,0 +1,35 @@
+{{#if current_user}}
+<form class="" action="/posts/new">
+  <input type="submit" name="new post" value="New post">
+</form>
+{{/ if}}
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4 col-sm-offset-4">
+      <div class="form-group">
+      </div>
+    {{#each posts}}
+    <div class="post-item">
+      <div class="post-content">
+        <a href="/posts/{{this._id}}">
+          <h1 class="posts-title" id="{{this._id}}">{{this.title}}</h1>
+        </a>
+        <div class="post-item-info">
+          <h4>Created At: {{this.createdAt}} </h4>
+          <h5> Subreddit: <a href="/n/{{this.subreddit}}">{{this.subreddit}}</a>
+            Author: {{this.author.username}}</h5>
+        </div>
+        <button type="button" id=commentButton name="comment">Add comment</button>
+      </div>
+      <div class="voting">
+        <button type="button" name="upvote">Upvote</button>
+        <button type="button" id="downvote" name="downvote">Down Vote</button>
+      </div>
+    </div>
+    <br />
+    {{/ each}}
+    </div>
+  </div>
+</div>

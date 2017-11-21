@@ -4,11 +4,13 @@
       <form class="form-signin" action="/login" method="POST">
         <h2 class="form-signin-heading">Please sign in</h2>
         <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" name="usernameç" placeholder="Email address" required="" autofocus="">
+        <input type="text" id="inputEmail" class="form-control" name="username" placeholder="Username" required="" autofocus="">
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password" required="">
-        <a href="Sign Up">Sign Up
         <div class="checkbox">
+          {{# if message}}
+          <p>{{message}}</p>
+          {{/if}}
           <label>
             <input type="checkbox" value="remember-me"> Remember me
           </label>

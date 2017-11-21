@@ -2,21 +2,26 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const PostSchema = new Schema({
-  createdAt:  { type: Date },
-  updatedAt:  { type: Date },
   title:      { type: String, required: true },
-  url:        { type: String, required: true },
-  summary:    { type: String, required: true },
-  subreddit:  {type: String, required: true}
+  content:    { type: String, required: true },
+  createdAt:  { type: Date, default: Date.now},
+  updatedAt:  { type: Date },
+  subreddit:   { type: String, required: true },
+  //comments:   [Comment.schema],
+  author:     { type: Schema.Types.ObjectId, ref: 'User', required: true },
+  //upVotes:    [ String ], // [{ type: Schema.Types.ObjectId, ref: 'user', required: true }],
+  //downVotes:  [{ type: Schema.Types.ObjectId, ref: 'user', required: true }],
+  //voteTotal:  { type: Number, default: 0 }
 });
 //*******Later add a field for Subreddit post name
 
 PostSchema.pre('save', (next) => {
   // SET createdAt AND updatedAt
-  const now = new Date()
-  this.updatedAt = now
+  const date = new Date
+  console.log(date.now)
+  this.updatedAt = date.now
   if (!this.createdAt) {
-    this.createdAt = now
+    this.createdAt = date.now
   }
   next()
 });

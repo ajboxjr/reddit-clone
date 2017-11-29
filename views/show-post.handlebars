@@ -16,10 +16,21 @@
         <button type="button" id="downvote" name="downvote">Down Vote</button>
       </div>
     </div>
-    <button type="button" id=commentButton name="comment">Add comment</button>
-    <div class="comment-container">
-        <input type="text" name="commentInput" id="commentInput" value="comment">
+
+    {{# if current_user}}
+    <div class="post-comment-form">
+      <form action="/posts/{{post._id}}/comments" method="POST">
+        <textarea class='form-control' name="content" placeholder="Comment"></textarea>
+        <div class="text-right">
+          <button type="submit">Save</button>
+        </div>
+      </form>
     </div>
+    {{/ if}}
+    <div class="post-comments">
+      {{#each post.comments}}
+        {{> comments}}
+    {{/each}}
     </div>
   </div>
 </div>

@@ -13,6 +13,7 @@ app = express();
 const post = require('./controllers/post');
 const auth = require('./controllers/auth-controller')
 const subreddit = require('./controllers/subreddit')
+const replies = require('./controllers/replies')
 
 //models
 var Post = require('./models/post');
@@ -52,6 +53,7 @@ app.use('/', post);
 // Routes for Login
 app.use('/', auth);
 app.use('/', subreddit)
+app.use('/', replies)
 
 // Homepage for RedditClone
 app.get('/', (req, res) => {

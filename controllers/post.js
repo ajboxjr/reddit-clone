@@ -60,7 +60,7 @@ router.get('/posts/:postId', (req, res) => {
       .exec(function (err, post) {
         //Post now contains post.author details(username)
         console.log(post)
-        res.render('show-post', {post:post, current_user: req.user});
+        res.render('show-post', {post:post, current_user: req.user} );
       });
 });
 

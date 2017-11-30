@@ -6,12 +6,8 @@ const UserSchema = new Schema({
     createdAt       : { type: Date },
     updatedAt       : { type: Date },
     password        : { type: String, select: false },
-<<<<<<< HEAD
     username        : { type: String, required: true },
     posts           : [{type: Schema.Types.ObjectId, ref: 'Post'}]
-=======
-    username        : { type: String, required: true }
->>>>>>> 783dcc85239aeab2d24e2d509d44cca88b2d365b
 });
 
 // Must use function here! ES6 => functions do not bind this!
@@ -22,12 +18,7 @@ UserSchema.pre('save', function(next) {
   if ( !this.createdAt ) {
     this.createdAt = now;
   }
-<<<<<<< HEAD
   // If the passsword is not modified ENCRYPT PASSWORD
-=======
-
-  // ENCRYPT PASSWORD
->>>>>>> 783dcc85239aeab2d24e2d509d44cca88b2d365b
   const user = this;
   if (!user.isModified('password')) {
     return next();
@@ -39,17 +30,11 @@ UserSchema.pre('save', function(next) {
     });
   });
 });
-<<<<<<< HEAD
-// ES6 Dosent bind this
-UserSchema.methods.comparePassword = function(password, done){
-=======
-
-
-UserSchema.methods.comparePassword = (password, done) => {
->>>>>>> 783dcc85239aeab2d24e2d509d44cca88b2d365b
+//Make sure that this is a es5 function call
+UserSchema.methods.comparePassword = function(password, done) {
   bcrypt.compare(password, this.password, (err, isMatch) => {
     done(err, isMatch);
   });
-};
+}
 
 module.exports = mongoose.model('User', UserSchema);

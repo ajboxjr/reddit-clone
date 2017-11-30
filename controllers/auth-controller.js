@@ -11,15 +11,14 @@ router.get('/sign-up', (req, res) => {
 
 //Post usrname and pswrd to database
 router.post('/sign-up', (req , res) => {
+		console.log(req.body)
     const user = new User(req.body);
 		console.log(user);
-
     user.save().then((user) => {
 			var token  = jwt.sign({ _id: user._id }, process.env.SECRET, {expiresIn:"30 days"});
 			res.cookie('nToken', token, {maxAge:900000, httpOnly:true});
 			console.log(token);
       res.redirect('/');
-
     }).catch((err) => {
       console.log(err.message);
 			return res.status(400).send({err:err})
@@ -69,6 +68,5 @@ router.get('/logout', (req,res)=>{
 	res.clearCookie('nToken');
 	res.redirect('/');
 });
-
 
 module.exports = router

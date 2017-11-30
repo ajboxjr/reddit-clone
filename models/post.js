@@ -4,6 +4,7 @@ const Schema = mongoose.Schema
 
 const PostSchema = new Schema({
   title:      { type: String, required: true },
+<<<<<<< HEAD
   content:    { type: String, required: true },
   createdAt:  { type: Date, default: Date.now},
   updatedAt:  { type: Date },
@@ -13,6 +14,11 @@ const PostSchema = new Schema({
   //upVotes:    [ String ], // [{ type: Schema.Types.ObjectId, ref: 'user', required: true }],
   //downVotes:  [{ type: Schema.Types.ObjectId, ref: 'user', required: true }],
   //voteTotal:  { type: Number, default: 0 }
+=======
+  url:        { type: String, required: true },
+  summary:    { type: String, required: true },
+  subreddit:  {type: String, required: true}
+>>>>>>> 783dcc85239aeab2d24e2d509d44cca88b2d365b
 });
 //*******Later add a field for Subreddit post name
 

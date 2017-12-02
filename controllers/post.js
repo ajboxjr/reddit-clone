@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-var bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 const Post = require('../models/post')
 const User = require('../models/user')
 const Comment = require('../models/comment')
@@ -12,20 +12,20 @@ var router = express.Router()
 router.get('/posts/new', (req, res) => {
   if(req.user){
   res.render('post-new', { current_user: req.user });
-}else {
+  }else {
   res.redirect('/')
 }
 })
 
+//Save post info as variables
+//Check if the user is logged in
 router.post('/posts/new', (req, res) => {
-  //Save post info as variables
-  //Check if the user is logged in
   const current_user = req.user
   if(current_user === null){
     res.redirect('/');
   }
   // Save requests vars and save to posts
-  var post = new Post(req.body)
+  const post = new Post(req.body)
   post.author = req.user._id
   // const authorId = req.user._id
   // const content = req.body.content
@@ -47,6 +47,7 @@ router.post('/posts/new', (req, res) => {
     });
 });
 
+//Get post based on Id
 router.get('/posts/:postId', (req, res) => {
   Post.findById({_id: req.params.postId})
   .populate('author')
@@ -56,14 +57,15 @@ router.get('/posts/:postId', (req, res) => {
        path: 'author',
        model: 'User'
      }
-    })// Refers to the pointer variable in User database
-      .exec(function (err, post) {
+    })
+    // Refers to the pointer variable in User database
+    .exec(function (err, post) {
         //Post now contains post.author details(username)
         console.log(post)
         res.render('show-post', {post:post, current_user: req.user} );
       });
 });
-
+//Post new comment to post based on Id
 router.post('/posts/:postId/comments', (req, res) => {
   const comment = new Comment(req.body)
   comment.author = req.user._id
@@ -79,9 +81,5 @@ router.post('/posts/:postId/comments', (req, res) => {
     console.log(err)
   })
 })
-router.get('/posts/:postId/comments', (req, res) => {
-  res.send('it works')
-})
-
 
 module.exports = router

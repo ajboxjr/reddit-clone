@@ -8,7 +8,7 @@ const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');                  // *** use json web token
 // *** Use cookie parser
 
-app = express();
+const app = express();
 
 //models
 const Post = require('./models/post')
@@ -34,14 +34,14 @@ app.set('view engine', 'handlebars');
 
 //Setting up database
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/reddit-clone' || process.env.MONGODB_URI  , {useMongoClient: true});
+mongoose.connect( process.env.MONGODB_URI || 'mongodb://localhost/reddit-clone'  , {useMongoClient: true});
 
 const checkAuth = function(req, res, next){
 	if(req.cookies.nToken === undefined || req.cookies.nToken === null){
 		req.user = null
 	} else {
-		var token = req.cookies.nToken
-		var decodedToken = jwt.decode(token, {complete: true} || {});
+		const token = req.cookies.nToken
+		const decodedToken = jwt.decode(token, {complete: true} || {});
 		req.user = decodedToken.payload;
 	}
 	next();
@@ -57,13 +57,13 @@ app.use('/', login);
 app.use('/', replies)
 
 // Homepage for RedditClone
-app.get('/', function(req, res){
+app.get('/', (req, res) => {
 	Post.find({}).populate('author').then((posts) => {
 		res.render('posts-index', {posts:posts, current_user: req.user});
 	});
 });
 
-app.get('/about', (req, res)=>{
+app.get('/about', (req, res) => {
 	res.render('about')
 })
 
@@ -74,6 +74,6 @@ app.use(function(req,res,next){
 });
 
 //Running server on port 3000.
-app.listen(3000, function(){
+app.listen(3000, () => {
 	console.log("running on port 3000");
 });
